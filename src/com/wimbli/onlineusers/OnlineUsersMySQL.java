@@ -17,6 +17,7 @@ public class OnlineUsersMySQL extends OnlineUsersDataSource {
     												"`name` varchar(32) NOT NULL, " +
     												"`time` datetime DEFAULT NULL, " +
     												"`time_total` int DEFAULT 0, " +
+    												"`online` int(1) DEFAULT 0," +
     												"PRIMARY KEY (`name`))";
     private static String sqlOnlineUser 	   = "INSERT INTO `"+OnlineUsers.table+"` (`name`, `time`, `online`) VALUES (?, NOW(), 1) ON DUPLICATE KEY UPDATE `time`=NOW(), `online`=1";
     private static String sqlOfflineUser 	   = "UPDATE `"+OnlineUsers.table+"` SET `time_total` = IF(`online`=1, `time_total` + TIMESTAMPDIFF(SECOND, `time`, NOW()), `time_total`), `online`=0 WHERE `name`=?";
